@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "ed07ade92cbaf50df205672bfd461d05b337b0fe"
+    "signature": "2ebe6744ac59fcb16d800445a23ca63f68df160e"
   },
   "compilationOptions": {},
   "targets": {
@@ -11,7 +11,7 @@
         "dependencies": {
           "SimpleABC.Api.Model": "1.0.0",
           "System.Text.Encoding.CodePages": "4.0.1",
-          "FreshCommonUtility": "1.0.0.1",
+          "FreshCommonUtility": "1.0.1",
           "NETStandard.Library": "1.6.0"
         },
         "runtime": {
@@ -43,7 +43,7 @@
           "lib/netstandard1.3/Dapper.dll": {}
         }
       },
-      "FreshCommonUtility/1.0.0.1": {
+      "FreshCommonUtility/1.0.1": {
         "dependencies": {
           "Dapper": "1.50.2",
           "MailKit": "1.10.1",
@@ -1873,10 +1873,10 @@
       "serviceable": true,
       "sha512": "sha512-31Ju5VGyNNc66OAsw+SCp1TWPBuyw8ZBdkMG5pSUPChZcy27s2GhVz5B9INP4f25mPqfiJ+mfeHy9JAJyyT+LQ=="
     },
-    "FreshCommonUtility/1.0.0.1": {
+    "FreshCommonUtility/1.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wDRrWuWxsk23tz0vbIY0JIWEfGM7KTxdDtn/LaIT8wJwhPl+1ueDRHjrQJ47B2dAtbMLEfyJhwoZRqoF8J2HRA=="
+      "sha512": "sha512-m8hCzVv0aA9wCuTxVo+jhMfkwZxMpmQnpzgnOyUeZfx5ytS6e3a0ezo9nE8/ywJIHz2f3PFppujFHptE9TKrVA=="
     },
     "Google.Protobuf/3.0.0-beta4": {
       "type": "package",

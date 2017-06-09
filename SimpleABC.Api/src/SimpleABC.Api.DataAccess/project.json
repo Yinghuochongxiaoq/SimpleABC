@@ -4,7 +4,7 @@
   "dependencies": {
     "SimpleABC.Api.Model": "1.0.0-*",
     "System.Text.Encoding.CodePages": "4.0.1",
-    "FreshCommonUtility": "1.0.0.1",
+    "FreshCommonUtility": "1.0.1",
     "NETStandard.Library": "1.6.0"
   },
 

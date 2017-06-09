@@ -32,7 +32,7 @@
           "lib/netstandard1.3/Dapper.dll": {}
         }
       },
-      "FreshCommonUtility/1.0.0.1": {
+      "FreshCommonUtility/1.0.1": {
         "type": "package",
         "dependencies": {
           "Dapper": "1.50.2",
@@ -2702,12 +2702,12 @@
         "lib/netstandard1.3/Dapper.xml"
       ]
     },
-    "FreshCommonUtility/1.0.0.1": {
-      "sha512": "wDRrWuWxsk23tz0vbIY0JIWEfGM7KTxdDtn/LaIT8wJwhPl+1ueDRHjrQJ47B2dAtbMLEfyJhwoZRqoF8J2HRA==",
+    "FreshCommonUtility/1.0.1": {
+      "sha512": "m8hCzVv0aA9wCuTxVo+jhMfkwZxMpmQnpzgnOyUeZfx5ytS6e3a0ezo9nE8/ywJIHz2f3PFppujFHptE9TKrVA==",
       "type": "package",
-      "path": "FreshCommonUtility/1.0.0.1",
+      "path": "FreshCommonUtility/1.0.1",
       "files": [
-        "FreshCommonUtility.1.0.0.1.nupkg.sha512",
+        "FreshCommonUtility.1.0.1.nupkg.sha512",
         "FreshCommonUtility.nuspec",
         "lib/netstandard1.6/FreshCommonUtility.dll",
         "lib/netstandard1.6/FreshCommonUtility.xml"
@@ -7571,7 +7571,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "FreshCommonUtility >= 1.0.0.1",
+      "FreshCommonUtility >= 1.0.1",
       "NETStandard.Library >= 1.6.0",
       "SimpleABC.Api.Model >= 1.0.0-*",
       "System.Text.Encoding.CodePages >= 4.0.1"
