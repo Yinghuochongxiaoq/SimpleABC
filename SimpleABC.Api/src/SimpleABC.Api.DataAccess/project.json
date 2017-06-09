@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "SimpleABC.Api.Model": "1.0.0-*",
+    "System.Text.Encoding.CodePages": "4.0.1",
+    "FreshCommonUtility": "1.0.0.1",
+    "NETStandard.Library": "1.6.0"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "net46",
+        "portable-net45+win8"
+      ]
+    }
+  },
+  "buildOptions": {
+    "xmlDoc": true
+  }
+}
