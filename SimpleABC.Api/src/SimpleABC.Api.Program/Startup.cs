@@ -1,6 +1,7 @@
 ﻿using SimpleABC.Api.Interface.ILogHistoryBll;
 using SimpleABC.Api.Program.MiddleWares;
 using FreshCommonUtility.CoreModel;
+using FreshCommonUtility.Dapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using SimpleABC.Api.Business.LogHistoryBll;
+using SimpleABC.Api.Interface.IUploadFileBll;
+using SimpleABC.Api.Business.UploadFileBll;
 
 namespace SimpleABC.Api.Program
 {
@@ -37,6 +40,8 @@ namespace SimpleABC.Api.Program
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            //set db access type
+            SimpleCRUD.SetDialect(SimpleCRUD.Dialect.MySQL);
         }
 
         /// <summary>
@@ -64,6 +69,8 @@ namespace SimpleABC.Api.Program
             services.Configure<AppSettingsModel>(Configuration.GetSection("AppSettings"));
             //Add Error log server
             services.AddTransient<IErrorLogBll, ErrorLogBll>();
+            //Add file upload server
+            services.AddTransient<IUploadFileStorageBll, UploadFileStorageBll>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
