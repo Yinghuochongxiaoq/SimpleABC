@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using SimpleABC.Api.Business.LogHistoryBll;
 using SimpleABC.Api.Interface.IUploadFileBll;
 using SimpleABC.Api.Business.UploadFileBll;
+using Swashbuckle.Swagger.Model;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace SimpleABC.Api.Program
 {
@@ -71,6 +73,31 @@ namespace SimpleABC.Api.Program
             services.AddTransient<IErrorLogBll, ErrorLogBll>();
             //Add file upload server
             services.AddTransient<IUploadFileStorageBll, UploadFileStorageBll>();
+            services.AddSwaggerGen();
+            //Add the detail information for the API.http://localhost:port/swagger/ui/index.html
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "SimpleABC.Api",
+                    Description = "SimpleABC.Api doc",
+                    TermsOfService = "None",
+                    Contact = new Contact { Name = "FreshMan", Email = "qinbocai@sina.cn", Url = "https://github.com/Yinghuochongxiaoq" },
+                    //License = new License { Name = "Use under LICX", Url = "http://url.com" }
+                });
+
+                //Determine base path for the application.
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                System.Console.WriteLine(basePath);
+                //Set the comments path for the swagger json and ui.
+                options.IncludeXmlComments(basePath + @"\SimpleABC.Api.Program.xml");
+                options.IncludeXmlComments(basePath + @"\SimpleABC.Api.Business.xml");
+                options.IncludeXmlComments(basePath + @"\SimpleABC.Api.DataAccess.xml");
+                options.IncludeXmlComments(basePath + @"\SimpleABC.Api.Interface.xml");
+                options.IncludeXmlComments(basePath + @"\SimpleABC.Api.Model.xml");
+                options.DescribeAllEnumsAsStrings();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +110,8 @@ namespace SimpleABC.Api.Program
             app.UseApplicationInsightsExceptionTelemetry();
             //异常处理中间件
             app.UseMiddleware(typeof(ExceptionHandlerMiddleWare));
+            app.UseSwagger();
+            app.UseSwaggerUi("doc/api");
             app.UseMvc();
         }
     }
