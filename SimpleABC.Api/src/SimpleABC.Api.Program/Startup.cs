@@ -15,6 +15,7 @@ using SimpleABC.Api.Interface.IUploadFileBll;
 using SimpleABC.Api.Business.UploadFileBll;
 using Swashbuckle.Swagger.Model;
 using Microsoft.Extensions.PlatformAbstractions;
+using System.IO;
 
 namespace SimpleABC.Api.Program
 {
@@ -91,16 +92,22 @@ namespace SimpleABC.Api.Program
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
                 System.Console.WriteLine(basePath);
                 //Set the comments path for the swagger json and ui.
-                options.IncludeXmlComments(basePath + @"\SimpleABC.Api.Program.xml");
-                options.IncludeXmlComments(basePath + @"\SimpleABC.Api.Business.xml");
-                options.IncludeXmlComments(basePath + @"\SimpleABC.Api.DataAccess.xml");
-                options.IncludeXmlComments(basePath + @"\SimpleABC.Api.Interface.xml");
-                options.IncludeXmlComments(basePath + @"\SimpleABC.Api.Model.xml");
+                var separatorChar = Path.DirectorySeparatorChar;
+                options.IncludeXmlComments(basePath + $@"{separatorChar}SimpleABC.Api.Program.xml");
+                options.IncludeXmlComments(basePath + $@"{separatorChar}SimpleABC.Api.Business.xml");
+                options.IncludeXmlComments(basePath + $@"{separatorChar}SimpleABC.Api.DataAccess.xml");
+                options.IncludeXmlComments(basePath + $@"{separatorChar}SimpleABC.Api.Interface.xml");
+                options.IncludeXmlComments(basePath + $@"{separatorChar}SimpleABC.Api.Model.xml");
                 options.DescribeAllEnumsAsStrings();
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
+        /// <param name="loggerFactory"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
