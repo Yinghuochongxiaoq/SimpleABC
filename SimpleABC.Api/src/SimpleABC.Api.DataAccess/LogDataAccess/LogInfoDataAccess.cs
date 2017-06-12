@@ -24,7 +24,7 @@ namespace SimpleABC.Api.DataAccess.LogDataAccess
         public int AddLogInfo(ErrorInfoLogModel newLogInfo)
         {
             if (newLogInfo == null) return 0;
-            var searchSql = @"INSERT INTO piferrorlog(
+            var searchSql = $@"INSERT INTO {DataTableGlobal.Chooseloginfo}(
     ContentType,
     ErrorMessage,
     InnerErrorMessage,
@@ -55,7 +55,7 @@ VALUES
         /// <returns></returns>
         public Task<int> AddLogInfoAsync(ErrorInfoLogModel newLogInfo)
         {
-            var searchSql = @"INSERT INTO piferrorlog (
+            var searchSql = $@"INSERT INTO {DataTableGlobal.Chooseloginfo} (
 	ContentType,
 	ErrorMessage,
 	InnerErrorMessage,
@@ -104,7 +104,7 @@ VALUES
             param.Add("startTime", startTime, DbType.DateTime);
             param.Add("endTime", endTime, DbType.DateTime);
             param.Add("errorType", errorType);
-            var errorLogList = SqlHelper.SearchPageList<ErrorInfoLogModel>(DataTableGlobal.PiFErrorLog, strWhere.ToString(), orderBy,
+            var errorLogList = SqlHelper.SearchPageList<ErrorInfoLogModel>(DataTableGlobal.Chooseloginfo, strWhere.ToString(), orderBy,
                 fieldList, pageIndex, pageSize, param, out countNumber);
             return errorLogList.ToList();
         }
