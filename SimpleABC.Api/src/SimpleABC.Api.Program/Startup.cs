@@ -120,6 +120,7 @@ namespace SimpleABC.Api.Program
             app.UseSwagger();
             app.UseSwaggerUi("doc/api");
             app.UseMvc();
+            app.UseStaticFiles();
         }
     }
 }

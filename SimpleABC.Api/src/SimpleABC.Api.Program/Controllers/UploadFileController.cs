@@ -72,10 +72,10 @@ namespace SimpleABC.Api.Program.Controllers
                 newFile.ImageName = fileName;
                 newFile.ImagePath = $@"\{fileRootPath}\{fileName}";
                 newFile.ImageSize = file.Length;
-                var newId = UploadFileServer.StorageFile(newFile);
+                UploadFileServer.StorageFile(newFile);
                 var resutleInfo = new DataBaseModel();
                 resutleInfo.StateCode = "200";
-                resutleInfo.StateDesc = $"Success {newId}";
+                resutleInfo.StateDesc = $"/{fileRootPath}/{fileName}";
                 return ResponseDataApi(resutleInfo);
             }
         }
