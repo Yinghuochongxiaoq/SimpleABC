@@ -16,7 +16,7 @@ namespace SimpleABC.Api.Interface.ILogHistoryBll
         /// </summary>
         /// <param name="exception"></param>
         /// <param name="context"></param>
-        Task<long> WriteErrorInfo(Exception exception, HttpContext context = null);
+        Task<int> WriteErrorInfo(Exception exception, HttpContext context = null);
 
         /// <summary>
         /// write warning.

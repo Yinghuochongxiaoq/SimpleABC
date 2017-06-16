@@ -1,6 +1,7 @@
 ﻿using SimpleABC.Api.Interface.ILogHistoryBll;
 using SimpleABC.Api.Program.MiddleWares;
 using FreshCommonUtility.CoreModel;
+using FreshCommonUtility.Dapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using SimpleABC.Api.Business.LogHistoryBll;
+using SimpleABC.Api.Interface.IUploadFileBll;
+using SimpleABC.Api.Business.UploadFileBll;
+using Swashbuckle.Swagger.Model;
+using Microsoft.Extensions.PlatformAbstractions;
+using System.IO;
 
 namespace SimpleABC.Api.Program
 {
@@ -37,6 +43,8 @@ namespace SimpleABC.Api.Program
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            //set db access type
+            SimpleCRUD.SetDialect(SimpleCRUD.Dialect.MySQL);
         }
 
         /// <summary>
@@ -64,6 +72,34 @@ namespace SimpleABC.Api.Program
             services.Configure<AppSettingsModel>(Configuration.GetSection("AppSettings"));
             //Add Error log server
             services.AddTransient<IErrorLogBll, ErrorLogBll>();
+            //Add file upload server
+            services.AddTransient<IUploadFileStorageBll, UploadFileStorageBll>();
+            services.AddSwaggerGen();
+            //Add the detail information for the API.http://localhost:port/swagger/ui/index.html
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "SimpleABC.Api",
+                    Description = "SimpleABC.Api doc",
+                    TermsOfService = "None",
+                    Contact = new Contact { Name = "FreshMan", Email = "qinbocai@sina.cn", Url = "https://github.com/Yinghuochongxiaoq" },
+                    //License = new License { Name = "Use under LICX", Url = "http://url.com" }
+                });
+
+                //Determine base path for the application.
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                System.Console.WriteLine(basePath);
+                //Set the comments path for the swagger json and ui.
+                var separatorChar = Path.DirectorySeparatorChar;
+                options.IncludeXmlComments(basePath + $@"{separatorChar}SimpleABC.Api.Program.xml");
+                options.IncludeXmlComments(basePath + $@"{separatorChar}SimpleABC.Api.Business.xml");
+                options.IncludeXmlComments(basePath + $@"{separatorChar}SimpleABC.Api.DataAccess.xml");
+                options.IncludeXmlComments(basePath + $@"{separatorChar}SimpleABC.Api.Interface.xml");
+                options.IncludeXmlComments(basePath + $@"{separatorChar}SimpleABC.Api.Model.xml");
+                options.DescribeAllEnumsAsStrings();
+            });
         }
 
         /// <summary>
@@ -81,7 +117,10 @@ namespace SimpleABC.Api.Program
             app.UseApplicationInsightsExceptionTelemetry();
             //异常处理中间件
             app.UseMiddleware(typeof(ExceptionHandlerMiddleWare));
+            app.UseSwagger();
+            app.UseSwaggerUi("doc/api");
             app.UseMvc();
+            app.UseStaticFiles();
         }
     }
 }

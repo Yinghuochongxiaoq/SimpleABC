@@ -8,6 +8,6 @@
         /// <summary>
         /// PiFErrorLog table
         /// </summary>
-        public static string PiFErrorLog = "PiFErrorLog";
+        public static string Chooseloginfo = "chooseloginfo";
     }
 }

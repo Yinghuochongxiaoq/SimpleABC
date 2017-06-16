@@ -48,6 +48,16 @@ namespace SimpleABC.Api.Business.LogHistoryBll
                 cacheListLength = RedisCacheHelper.GetListLength(cacheKey.Cachekey, cacheKey.DatabaseNumber);
             }
         }
+
+        /// <summary>
+        /// Stock method
+        /// </summary>
+        /// <param name="cacheModel"></param>
+        private Task<int> StockErrorLogInfo(ErrorInfoLogModel cacheModel)
+        {
+            var logInfoDataAccess = new LogInfoDataAccess();
+            return logInfoDataAccess.AddLogInfoAsync(cacheModel);
+        }
         #endregion
 
         #region [2、Interface]
@@ -57,7 +67,7 @@ namespace SimpleABC.Api.Business.LogHistoryBll
         /// </summary>
         /// <param name="exception"></param>
         /// <param name="context"></param>
-        public Task<long> WriteErrorInfo(Exception exception, HttpContext context = null)
+        public Task<int> WriteErrorInfo(Exception exception, HttpContext context = null)
         {
             var errorModel = new ErrorInfoLogModel
             {
@@ -70,11 +80,7 @@ namespace SimpleABC.Api.Business.LogHistoryBll
                 ErrorType = ErrorTypeEnum.Error.GetHashCode()
             };
 
-            var resulte = WriteAllLogToRedis(errorModel);
-            if (resulte.Result > 0)
-            {
-                StockErrorLogInfo();
-            }
+            var resulte = StockErrorLogInfo(errorModel);
             return resulte;
         }
 
